@@ -4,8 +4,8 @@ session_start();
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:8100"); 
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 // Database connection details
 $host = 'localhost';
-$dbname = 'pos';
-$username = 'root'; // Change this to your DB username
-$password = ''; // Change this to your DB password
+$dbname = "stanwsdw_Pos";
+$username = 'stanwsdw_vick	'; // Change this to your DB username
+$password = "81GTXC!$ZTUX"; // Change this to your DB password
 
 // Connect to the database
 try {

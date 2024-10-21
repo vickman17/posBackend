@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-session_start(); // Start session management
+session_start();
 
 // Database connection parameters
 $servername = "localhost"; // Change as needed
@@ -28,52 +28,46 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
-    echo json_encode(["success" => false, "message" => "Connection failed: " . $conn->connect_error]);
-    exit();
+    die("Connection failed: " . $conn->connect_error);
 }
 
 // Retrieve the raw JSON request body
 $json = file_get_contents("php://input");
 $data = json_decode($json, true); // Decode JSON to associative array
 
-// Check if data is valid
-if (json_last_error() !== JSON_ERROR_NONE) {
-    echo json_encode(["success" => false, "message" => "Invalid JSON input."]);
-    exit();
-}
-
 // Get values from the decoded JSON
-$employees_tag = $data['employees_tag'] ?? '';
-$username = $data['username'] ?? '';
-$email = $data['email'] ?? '';
-$phoneNumber = $data['phoneNumber'] ?? '';
-$password = $data['password'] ?? '';
+$employees_tag = isset($data['employees_tag']) ? $data['employees_tag'] : '';
+$username = isset($data['username']) ? $data['username'] : '';
+$email = isset($data['email']) ? $data['email'] : '';
+$phoneNumber = isset($data['phoneNumber']) ? $data['phoneNumber'] : '';
+$password = isset($data['password']) ? $data['password'] : '';
+$changedTime = time();
 
-// Initialize a flag to track if the password was changed
+// Initialize a flag to track if password was changed
 $passwordChanged = false;
 
-// Check if a new password is provided
+// Check if only password is provided
 if (!empty($password)) {
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
     // Prepare the SQL statement to update the password
-    $sqlPassword = "UPDATE employees SET password = ?, last_password_change = NOW() WHERE employee_tag = ?";
+    $sqlPassword = "UPDATE employees SET password = ?, last_password_change = ? WHERE employee_tag = ?";
     if ($stmtPassword = $conn->prepare($sqlPassword)) {
-        $stmtPassword->bind_param("ss", $hashedPassword, $employees_tag);
+        $stmtPassword->bind_param("sss", $hashedPassword, $changedTime, $employees_tag);
         
         // Execute the statement
         if ($stmtPassword->execute()) {
             $passwordChanged = true; // Set flag to true if password was changed
         } else {
-            echo json_encode(["success" => false, "message" => "Error updating password: " . $stmtPassword->error]);
+            echo json_encode(["message" => "Error updating password: " . $stmtPassword->error]);
             $stmtPassword->close();
             $conn->close();
             exit();
         }
         $stmtPassword->close();
     } else {
-        echo json_encode(["success" => false, "message" => "Error preparing password update statement: " . $conn->error]);
+        echo json_encode(["message" => "Error preparing password update statement: " . $conn->error]);
         $conn->close();
         exit();
     }
@@ -98,19 +92,21 @@ if (!empty($username) || !empty($email) || !empty($phoneNumber)) {
                     $stmtInvalidate->close();
                 }
 
-                // Clear the session on the server side
+                // Also, clear the session on the server side
                 session_destroy();
+                // Optionally, clear any session cookies here if needed
             }
-            echo json_encode(["success" => true, "message" => "User information updated successfully."]);
+            echo json_encode(["message" => "User information updated successfully"]);
         } else {
-            echo json_encode(["success" => false, "message" => "Error updating employee: " . $stmt->error]);
+            echo json_encode(["message" => "Error updating employee: " . $stmt->error]);
         }
         $stmt->close();
     } else {
-        echo json_encode(["success" => false, "message" => "Error preparing statement: " . $conn->error]);
+        echo json_encode(["message" => "Error preparing statement: " . $conn->error]);
     }
 } else if ($passwordChanged) {
-    echo json_encode(["success" => true, "message" => "Password updated successfully, user logged out from all devices."]);
+    // If only the password was changed
+    echo json_encode(["message" => "Password updated successfully, user logged out from all devices."]);
 }
 
 // Close the connection

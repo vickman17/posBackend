@@ -1,6 +1,7 @@
 <?php
 
 // At the beginning of your PHP file
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Origin: http://localhost:8100"); // Allow requests from your Ionic app
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");

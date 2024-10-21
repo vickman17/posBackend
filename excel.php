@@ -2,7 +2,7 @@
 session_start();
 
 
-    $conn = new mysqli("localhost", "root", "", "pos");
+    $conn = new mysqli("localhost:3306", "stanwsdw_vick	", "", "stanwsdw_Pos");
 
     if ($conn->connect_error){
         die("Connection Failed: ".$conn->connect_error);

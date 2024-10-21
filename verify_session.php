@@ -2,6 +2,7 @@
 session_start();
  // Start the session or resume the existing session
 
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Origin: http://localhost:8100");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -14,10 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Include the database connection file
-$host = 'localhost';
-$db_name = 'pos'; // Use your actual database name
-$username = 'root'; // Use your actual DB username
-$password = ''; // Use your actual DB password
+$host = 'localhost:3306';
+$db_name = "stanwsdw_Pos"; // Use your actual database name
+$username = 'stanwsdw_vick	'; // Use your actual DB username
+$password = "81GTXC!$ZTUX"; // Use your actual DB password
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);

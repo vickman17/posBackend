@@ -1,7 +1,8 @@
 <?php
 
 
-header("Access-Control-Allow-Origin: http://localhost:8100");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:8100"); 
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Credentials: true");
@@ -15,9 +16,9 @@ session_start();
 header("Content-Type: application/json; charset=UTF-8");
 
 $host = 'localhost';
-$db_name = 'pos';
-$username = 'root';
-$password = '';
+$db_name = "stanwsdw_Pos";
+$username = 'stanwsdw_vick';
+$password = "81GTXC!$ZTUX";
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);

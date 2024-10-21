@@ -2,11 +2,8 @@
 session_start();
 
 // Enable CORS if necessary
-header("Access-Control-Allow-Origin: http://localhost:8100"); 
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Origin: *"); // Allows any origin
+header("Access-Control-Allow-Origin: http://localhost:8100");  // Allows any origin
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Content-Type: application/json; charset=UTF-8");
@@ -24,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 
 // Database connection setup
-$servername = "localhost"; // Update with your DB server
-$username = "root"; // Update with your DB username
-$password = ""; // Update with your DB password
-$dbname = "pos";   // Update with your DB name
+$servername = "localhost:3306"; // Update with your DB server
+$username = "stanwsdw_vick	"; // Update with your DB username
+$password = "81GTXC!$ZTUX"; // Update with your DB password
+$dbname = "stanwsdw_Pos";   // Update with your DB name
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

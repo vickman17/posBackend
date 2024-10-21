@@ -56,7 +56,7 @@ final class UriNormalizer
     /**
      * Removes the default host of the given URI scheme from the URI.
      *
-     * Only the "file" scheme defines the default host "localhost".
+     * Only the "file" scheme defines the default host "localhost:3306".
      * All of `file:/myfile`, `file:///myfile`, and `file://localhost/myfile`
      * are equivalent according to RFC 3986. The first format is not accepted
      * by PHPs stream functions and thus already normalized implicitly to the
