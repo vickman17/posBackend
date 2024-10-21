@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 // Database connection setup
 $servername = "localhost:3306"; // Update with your DB server
-$username = "stanwsdw_vick	"; // Update with your DB username
-$password = "81GTXC!$ZTUX"; // Update with your DB password
+$username = "stanwsdw_vick"; // Update with your DB username
+$password = '81GTXC!$ZTUX'; // Update with your DB password
 $dbname = "stanwsdw_Pos";   // Update with your DB name
 
 $conn = new mysqli($servername, $username, $password, $dbname);

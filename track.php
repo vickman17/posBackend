@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 // Database connection details
 $host = 'localhost';
 $dbname = "stanwsdw_Pos";
-$username = 'stanwsdw_vick	'; // Change this to your DB username
-$password = "81GTXC!$ZTUX"; // Change this to your DB password
+$username = 'stanwsdw_vick'; // Change this to your DB username
+$password = '81GTXC!$ZTUX'; // Change this to your DB password
 
 // Connect to the database
 try {

@@ -18,10 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 session_start();
 
 // Database connection parameters
-$servername = "localhost"; // Change as needed
-$dbusername = "root"; // Change as needed
-$dbpassword = ""; // Change as needed
-$dbname = "pos"; // Change as needed
+$servername = "localhost:3306"; // Change as needed
+$dbusername = "stanwsdw_vick"; // Change as needed
+$dbpassword = '81GTXC!$ZTUX'; // Change as needed
+$dbname = "stanwsdw_Pos"; // Change as needed
 
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
