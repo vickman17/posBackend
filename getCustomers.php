@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Enable CORS
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET");

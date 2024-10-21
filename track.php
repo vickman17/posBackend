@@ -1,4 +1,8 @@
 <?php
+
+session_start();
+ // Start the session or resume the existing session
+
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 header("Access-Control-Allow-Origin: http://localhost:8100"); 

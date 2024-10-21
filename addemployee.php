@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Enable CORS if necessary
 header("Access-Control-Allow-Origin: http://localhost:8100"); 
 header("Access-Control-Allow-Origin: *");
